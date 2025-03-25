@@ -10,7 +10,7 @@ import { UserButton } from "@clerk/nextjs";
 import { ThemeSwitcherBtn } from "./ThemeSwitcherBtn";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
-import Logo from "./Logo";
+import Logo, { LogoMobile } from "./Logo";
 
 function NavBar() {
   return (
@@ -47,13 +47,14 @@ function MobileNavbar() {
                   key={item.label}
                   link={item.link}
                   label={item.label}
+                  clickCallBack={() => setIsOpen((prev) => !prev)}
                 />
               ))}
             </div>
           </SheetContent>
         </Sheet>
         <div className="flex h-[80px] min-h-[60px] items-center gap-x-4">
-          <Logo />
+          <LogoMobile />
         </div>
         <div className="flex items-center gap-2">
           <ThemeSwitcherBtn />
@@ -89,7 +90,15 @@ function DesktopNavbar() {
   );
 }
 
-function NavbarItem({ label, link }: { label: string; link: string }) {
+function NavbarItem({
+  label,
+  link,
+  clickCallBack,
+}: {
+  label: string;
+  link: string;
+  clickCallBack?: () => void;
+}) {
   const pathname = usePathname();
   const isActive = pathname === link;
 
@@ -104,6 +113,9 @@ function NavbarItem({ label, link }: { label: string; link: string }) {
           "w-full justify-start text-lg text-muted-foreground hover:text-foreground",
           isActive && "text-foreground"
         )}
+        onClick={() => {
+          if (clickCallBack) clickCallBack();
+        }}
       >
         {label}
       </Link>
