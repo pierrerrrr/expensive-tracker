@@ -120,7 +120,7 @@ function NavbarItem({
         {label}
       </Link>
       {isActive && (
-        <div className="absolute -bottom-[2px] left-1/2 hidden h-[2px[ w-[80%] -translate-x-1/2 rounded-xl bg-foreground md:block"></div>
+        <div className="absolute -bottom-[2px] left-0 right-0 mx-auto h-[2px] w-[80%] bg-foreground"></div>
       )}
     </div>
   );
